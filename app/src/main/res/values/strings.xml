@@ -3,4 +3,5 @@
     <string name="login" > Log in </string>
     <string name="signup" > Sign UP </string>
     <string name="forgotPassowrd" > Forgot Password? </string>
+    <string name="welcome" > Welcome </string>
 </resources>
