@@ -8,22 +8,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,9 +39,14 @@ import androidx.compose.ui.unit.sp
 import com.example.finwise.R
 import com.example.finwise.ui.theme.Caribbean_Green
 import com.example.finwise.ui.theme.Honeydew
+import com.example.finwise.views.sharedComponents.LoginSignup
 
 @Composable
-fun Launch(modifier: Modifier = Modifier, paddingValues: PaddingValues) {
+fun Launch(
+    modifier: Modifier = Modifier,
+    onLoginClick: () -> Unit,
+    onSignupClick: () -> Unit
+) {
     var isVisible by remember { mutableStateOf(false) }
 
     val offsetY by animateDpAsState(
@@ -58,17 +55,17 @@ fun Launch(modifier: Modifier = Modifier, paddingValues: PaddingValues) {
     )
 
     val backgroundColor by animateColorAsState(
-        targetValue = if (isVisible) Honeydew else Caribbean_Green, // Azul claro para azul médio
+        targetValue = if (isVisible) Honeydew else Caribbean_Green,
         animationSpec = tween(durationMillis = 1000)
     )
 
     val textColor by animateColorAsState(
-        targetValue = if (isVisible) Caribbean_Green else Honeydew, // Azul claro para azul médio
+        targetValue = if (isVisible) Caribbean_Green else Honeydew,
         animationSpec = tween(durationMillis = 1000)
     )
 
     Column(
-        Modifier
+        modifier
             .fillMaxSize()
             .background(backgroundColor)
             .clickable {
@@ -78,7 +75,7 @@ fun Launch(modifier: Modifier = Modifier, paddingValues: PaddingValues) {
         verticalArrangement = Arrangement.Center
     ) {
         Column(
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .offset(y = offsetY),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -101,12 +98,12 @@ fun Launch(modifier: Modifier = Modifier, paddingValues: PaddingValues) {
             visible = isVisible
         ) {
             Column(
-                Modifier.fillMaxWidth(),
+                modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. ",
-                    Modifier.fillMaxWidth(0.7f),
+                    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+                    modifier.fillMaxWidth(0.7f),
                     style = TextStyle(
                         fontSize = 12.sp,
                         fontFamily = FontFamily(Font(R.font.poppins_medium)),
@@ -116,64 +113,19 @@ fun Launch(modifier: Modifier = Modifier, paddingValues: PaddingValues) {
                     )
                 )
 
-                Spacer(
-                    Modifier.height(30.dp)
-                )
+                Spacer(modifier.height(30.dp))
 
-                Button(
-                    {},
-                    Modifier.fillMaxWidth(0.5f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Caribbean_Green // Cor do botão
-                    )
-                ) {
-                    Text(
-                        text = stringResource(R.string.login),
-                        style = TextStyle(
-                            fontSize = 22.sp,
-                            fontFamily = FontFamily(Font(R.font.poppins_semibold)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF4B4544),
-                            textAlign = TextAlign.Center,
-                        )
-                    )
-                }
-
-                Spacer(
-                    Modifier.height(10.dp)
-                )
-
-                Button(
-                    {},
-                    Modifier.fillMaxWidth(0.5f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = LightGray // Cor do botão
-                    )
-                ) {
-                    Text(
-                        text = stringResource(R.string.signup),
-                        style = TextStyle(
-                            fontSize = 22.sp,
-                            fontFamily = FontFamily(Font(R.font.poppins_semibold)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF4B4544),
-                            textAlign = TextAlign.Center,
-                        )
-                    )
-                }
+                LoginSignup(onLoginClick = onLoginClick, onSignupClick = onSignupClick)
             }
         }
     }
 }
 
-
 @Preview
 @Composable
-private fun LaunchPrev() {
-    Scaffold { innerPadding ->
-        Launch(
-            paddingValues = innerPadding,
-        )
-    }
-
+fun PreviewLaunchScreen() {
+    Launch(
+        onLoginClick = { /* Simula clique no login */ },
+        onSignupClick = { /* Simula clique no signup */ }
+    )
 }
