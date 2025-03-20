@@ -11,8 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.finwise.navigation.navhost.AppNavHost
+import com.example.finwise.navigation.routes.LoginRoutes
 import com.example.finwise.ui.theme.FinWiseTheme
 import com.example.finwise.views.launch.Launch
+import com.example.finwise.views.login.Login
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +26,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FinWiseTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Launch(paddingValues = innerPadding)
-                }
+                val navHostController = rememberNavController()
+                AppNavHost(navHostController)
             }
         }
     }

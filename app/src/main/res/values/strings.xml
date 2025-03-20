@@ -4,4 +4,13 @@
     <string name="signup" > Sign UP </string>
     <string name="forgotPassowrd" > Forgot Password? </string>
     <string name="welcome" > Welcome </string>
+    <string name="Use" > Use </string>
+    <string name="fingerprint" > fingerprint  </string>
+    <string name="toaccess" > to access </string>
+    <string name="orsignupwith" > or sign up with </string>
+    <string name="donthaveanaccount" > Don’t have an account?  </string>
+    <string name="usernameoremail" > Username or email  </string>
+    <string name="password" > Password  </string>
+    <string name="togglepasswordvisibility" > Toggle password visibility  </string>
+    <string name="emailIcon" > Email Icon  </string>
 </resources>
