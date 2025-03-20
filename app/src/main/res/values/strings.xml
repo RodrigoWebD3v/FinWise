@@ -2,6 +2,7 @@
     <string name="app_name">FinWise</string>
     <string name="login"> Log in </string>
     <string name="signup"> Sign UP </string>
+    <string name="signIn"> Sign In </string>
     <string name="forgotPassowrd"> Forgot Password? </string>
     <string name="welcome"> Welcome </string>
     <string name="Use"> Use </string>

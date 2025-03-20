@@ -1,18 +1,19 @@
 package com.example.finwise
 
 import android.app.Application
-import com.example.finwise.di.appModule
+import com.example.finwise.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-class FinWiseApplication : Application(){
+class MainApplication : Application(){
     override fun onCreate() {
         super.onCreate()
 
         startKoin {
             androidLogger()
-            androidContext(this@FinWiseApplication)
+            androidContext(this@MainApplication)
+            modules(viewModelsModule)
         }
     }
 }

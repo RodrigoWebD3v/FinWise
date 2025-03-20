@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -37,6 +38,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,28 +66,32 @@ import com.example.finwise.ui.theme.Caribbean_Green
 import com.example.finwise.ui.theme.Light_Green
 import com.example.finwise.ui.theme.TextGreen
 import com.example.finwise.views.sharedComponents.LoginSignup
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Signup(modifier: Modifier = Modifier) {
+fun Signup(modifier: Modifier = Modifier, onSigninClick : () -> Unit) {
 
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+   val viewModel = koinViewModel<SignupViewModel>()
 
-    var isVisible by remember { mutableStateOf(true) }
+    var isVisible by remember { mutableStateOf(false) }
 
     var isPasswordVisible by remember { mutableStateOf(false) }
 
     var isConfirmPasswordVisible by remember { mutableStateOf(false) }
 
-//    LaunchedEffect(Unit) {
-//        isVisible = true
-//    }
+    val uiState by viewModel.uiState.collectAsState()
+
+
+    LaunchedEffect(Unit) {
+        isVisible = true
+    }
 
     Column(
         Modifier
             .fillMaxSize()
             .background(Caribbean_Green),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = stringResource(R.string.welcome),
@@ -103,10 +109,8 @@ fun Signup(modifier: Modifier = Modifier) {
             visible = isVisible,
             enter = slideInVertically(initialOffsetY = { it },  animationSpec = tween(durationMillis = 1000, easing = LinearOutSlowInEasing)) + fadeIn(),
             exit = fadeOut(),
-
             ) {
             Box(contentAlignment = Alignment.BottomEnd) {
-
                 Image(
                     painter = painterResource(id = R.drawable.base_shape),
                     contentDescription = "Background column",
@@ -114,13 +118,15 @@ fun Signup(modifier: Modifier = Modifier) {
 
                 Column(
                     Modifier
-                        .fillMaxSize(),
+                        .fillMaxWidth().fillMaxHeight(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.Center
                 ) {
                     Column(
-                        Modifier.padding(top = 45.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        Modifier
+                            .fillMaxHeight(0.9f),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
 
                         Column {
@@ -134,8 +140,8 @@ fun Signup(modifier: Modifier = Modifier) {
                                 modifier = Modifier.padding(start = 20.dp)
                             )
                             TextField(
-                                value = email,
-                                onValueChange = { email = it },
+                                value = uiState.email,
+                                onValueChange = { uiState.onChangeEmail(it) },
                                 placeholder = { Text("Silvester Stalonge") },
                                 shape = RoundedCornerShape(30.dp),
                                 colors = TextFieldDefaults.colors(
@@ -155,8 +161,6 @@ fun Signup(modifier: Modifier = Modifier) {
                             )
                         }
 
-                        Spacer(Modifier.size(5.dp))
-
                         Column {
                             Text(
                                 stringResource(R.string.email), style = TextStyle(
@@ -168,8 +172,8 @@ fun Signup(modifier: Modifier = Modifier) {
                                 modifier = Modifier.padding(start = 20.dp)
                             )
                             TextField(
-                                value = password,
-                                onValueChange = { password = it },
+                                value = uiState.email,
+                                onValueChange = { uiState.onChangeEmail(it) },
                                 placeholder = { Text("example@example.com") },
                                 shape = RoundedCornerShape(30.dp),
                                 colors = TextFieldDefaults.colors(
@@ -186,7 +190,7 @@ fun Signup(modifier: Modifier = Modifier) {
                             )
 
                         }
-                        Spacer(Modifier.size(5.dp))
+
                         Column {
                             Text(
                                 stringResource(R.string.mobilenumber), style = TextStyle(
@@ -198,8 +202,8 @@ fun Signup(modifier: Modifier = Modifier) {
                                 modifier = Modifier.padding(start = 20.dp)
                             )
                             TextField(
-                                value = password,
-                                onValueChange = { password = it },
+                                value = uiState.mobileNumber,
+                                onValueChange = { uiState.onChangeMobileNumber(it) },
                                 placeholder = { Text("+123 456 789") },
                                 shape = RoundedCornerShape(30.dp),
                                 colors = TextFieldDefaults.colors(
@@ -216,7 +220,7 @@ fun Signup(modifier: Modifier = Modifier) {
                             )
 
                         }
-                        Spacer(Modifier.size(5.dp))
+
                         Column {
                             Text(
                                 stringResource(R.string.dateofbirth), style = TextStyle(
@@ -228,8 +232,8 @@ fun Signup(modifier: Modifier = Modifier) {
                                 modifier = Modifier.padding(start = 20.dp)
                             )
                             TextField(
-                                value = password,
-                                onValueChange = { password = it },
+                                value = uiState.dateOfBirth,
+                                onValueChange = { uiState.onChangeDateOfBirth(it) },
                                 placeholder = { Text("DD/MM/YYYY") },
                                 shape = RoundedCornerShape(30.dp),
                                 colors = TextFieldDefaults.colors(
@@ -246,7 +250,7 @@ fun Signup(modifier: Modifier = Modifier) {
                             )
 
                         }
-                        Spacer(Modifier.size(5.dp))
+
                         Column {
                             Text(
                                 stringResource(R.string.password), style = TextStyle(
@@ -258,8 +262,8 @@ fun Signup(modifier: Modifier = Modifier) {
                                 modifier = Modifier.padding(start = 20.dp)
                             )
                             TextField(
-                                value = password,
-                                onValueChange = { password = it },
+                                value = uiState.password,
+                                onValueChange = { uiState.onChangePassword(it) },
                                 placeholder = { Text("***********") },
                                 shape = RoundedCornerShape(30.dp),
                                 colors = TextFieldDefaults.colors(
@@ -289,7 +293,7 @@ fun Signup(modifier: Modifier = Modifier) {
                             )
 
                         }
-                        Spacer(Modifier.size(5.dp))
+
                         Column {
                             Text(
                                 stringResource(R.string.confirmpassword), style = TextStyle(
@@ -301,8 +305,8 @@ fun Signup(modifier: Modifier = Modifier) {
                                 modifier = Modifier.padding(start = 20.dp)
                             )
                             TextField(
-                                value = password,
-                                onValueChange = { password = it },
+                                value = uiState.confirmPassword,
+                                onValueChange = { uiState.onChangeConfirmPassword(it) },
                                 placeholder = { Text("***********") },
                                 shape = RoundedCornerShape(30.dp),
                                 colors = TextFieldDefaults.colors(
@@ -362,7 +366,7 @@ fun Signup(modifier: Modifier = Modifier) {
                                 )
                             )
                         }
-                        Spacer(Modifier.size(10.dp))
+
                         Row {
                             Text(
                                 stringResource(R.string.alreadyhaveanaccount),
@@ -374,16 +378,19 @@ fun Signup(modifier: Modifier = Modifier) {
                                     textAlign = TextAlign.Center,
                                 )
                             )
-                            Spacer(Modifier.size(5.dp))
+
                             Text(
-                                stringResource(R.string.signup),
+                                stringResource(R.string.signIn),
                                 style = TextStyle(
                                     fontSize = 13.sp,
                                     lineHeight = 15.sp,
                                     fontFamily = FontFamily(Font(R.font.poppins_semibold)),
                                     color = Color(0xff0774fe),
                                     textAlign = TextAlign.Center,
-                                )
+                                ),
+                                modifier = Modifier.clickable {
+                                    onSigninClick()
+                                }
                             )
                         }
 
@@ -397,5 +404,7 @@ fun Signup(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun SignupPrev() {
-    Signup()
+    Signup(
+        onSigninClick = {}
+    )
 }

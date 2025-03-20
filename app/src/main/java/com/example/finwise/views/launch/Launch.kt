@@ -44,7 +44,7 @@ import com.example.finwise.views.sharedComponents.LoginSignup
 @Composable
 fun Launch(
     modifier: Modifier = Modifier,
-    onLoginClick: () -> Unit,
+    onSigninClick: () -> Unit,
     onSignupClick: () -> Unit
 ) {
     var isVisible by remember { mutableStateOf(false) }
@@ -115,7 +115,7 @@ fun Launch(
 
                 Spacer(modifier.height(30.dp))
 
-                LoginSignup(onLoginClick = onLoginClick, onSignupClick = onSignupClick)
+                LoginSignup(onLoginClick = onSigninClick, onSignupClick = onSignupClick)
             }
         }
     }
@@ -125,7 +125,7 @@ fun Launch(
 @Composable
 fun PreviewLaunchScreen() {
     Launch(
-        onLoginClick = { /* Simula clique no login */ },
+        onSigninClick = { /* Simula clique no login */ },
         onSignupClick = { /* Simula clique no signup */ }
     )
 }

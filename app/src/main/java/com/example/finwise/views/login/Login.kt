@@ -69,7 +69,7 @@ import com.example.finwise.ui.theme.TextGreen
 import com.example.finwise.views.sharedComponents.LoginSignup
 
 @Composable
-fun Login(modifier: Modifier = Modifier) {
+fun Login(modifier: Modifier = Modifier, onSignupClick: () -> Unit) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -211,7 +211,9 @@ fun Login(modifier: Modifier = Modifier) {
 
                         LoginSignup(
                             onLoginClick = { },
-                            onSignupClick = { },
+                            onSignupClick = {
+                                onSignupClick()
+                            },
                             isLogin = true
                         )
 
@@ -334,6 +336,6 @@ fun Login(modifier: Modifier = Modifier) {
 private fun LoginPreview() {
 
     Login(
-
+        onSignupClick = {}
     )
 }
