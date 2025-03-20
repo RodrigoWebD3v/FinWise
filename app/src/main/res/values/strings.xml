@@ -1,16 +1,23 @@
 <resources>
     <string name="app_name">FinWise</string>
-    <string name="login" > Log in </string>
-    <string name="signup" > Sign UP </string>
-    <string name="forgotPassowrd" > Forgot Password? </string>
-    <string name="welcome" > Welcome </string>
-    <string name="Use" > Use </string>
-    <string name="fingerprint" > fingerprint  </string>
-    <string name="toaccess" > to access </string>
-    <string name="orsignupwith" > or sign up with </string>
-    <string name="donthaveanaccount" > Don’t have an account?  </string>
-    <string name="usernameoremail" > Username or email  </string>
-    <string name="password" > Password  </string>
-    <string name="togglepasswordvisibility" > Toggle password visibility  </string>
-    <string name="emailIcon" > Email Icon  </string>
+    <string name="login"> Log in </string>
+    <string name="signup"> Sign UP </string>
+    <string name="forgotPassowrd"> Forgot Password? </string>
+    <string name="welcome"> Welcome </string>
+    <string name="Use"> Use </string>
+    <string name="fingerprint"> fingerprint  </string>
+    <string name="toaccess"> to access </string>
+    <string name="orsignupwith"> or sign up with </string>
+    <string name="donthaveanaccount"> Don’t have an account?  </string>
+    <string name="usernameoremail"> Username or email  </string>
+    <string name="password"> Password  </string>
+    <string name="togglepasswordvisibility"> Toggle password visibility  </string>
+    <string name="emailIcon"> Email Icon  </string>
+    <string name="fullname"> Full name  </string>
+    <string name="email"> Email </string>
+    <string name="mobilenumber"> Mobile Number </string>
+    <string name="dateofbirth"> Date of birth </string>
+    <string name="confirmpassword"> Confirm Password </string>
+    <string name="alreadyhaveanaccount"> Already have an account?  </string>
+    <string name="terms"> By continuing, you agree to Terms of Use and Privacy Policy. </string>
 </resources>

@@ -78,11 +78,6 @@ fun Login(modifier: Modifier = Modifier) {
 
     var isPasswordVisible by remember { mutableStateOf(false) }
 
-    val offsetY by animateDpAsState(
-        targetValue = if (isVisible) (-10).dp else 0.dp,
-        animationSpec = tween(durationMillis = 3000)
-    )
-
     LaunchedEffect(Unit) {
         isVisible = true
     }
